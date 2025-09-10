@@ -460,7 +460,6 @@ const LandingPage = ({ onEnter }) => {
                   </div>
                   <div className="card-footer">
                     <div className="card-info">
-                      <span className="best-time">Best Time: {place.bestTime}</span>
                       <span className="district-tag">{place.district} District</span>
                     </div>
                     <button className="btn btn-outline read-more-btn" onClick={onEnter}>
