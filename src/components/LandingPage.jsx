@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  MapPin, 
-  Users, 
-  Award, 
-  ChevronDown, 
-  Menu, 
-  X, 
-  BookOpen, 
-  Star, 
-  ArrowRight, 
+import {
+  MapPin,
+  Users,
+  Award,
+  ChevronDown,
+  Menu,
+  X,
+  BookOpen,
+  Star,
+  ArrowRight,
   Globe,
   Navigation,
   Phone,
@@ -301,12 +301,12 @@ const LandingPage = ({ onEnter }) => {
               <h2>Jharkhand Tourism</h2>
             </div>
             <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-              <a href="#home" onClick={() => {setIsMenuOpen(false); scrollToSection('home');}}>Home</a>
-              <a href="#destinations" onClick={() => {setIsMenuOpen(false); scrollToSection('destinations');}}>Destinations</a>
-              <a href="#districts" onClick={() => {setIsMenuOpen(false); scrollToSection('districts');}}>Districts</a>
-              <a href="#guides" onClick={() => {setIsMenuOpen(false); scrollToSection('guides');}}>Guides</a>
-              <a href="#group-travel" onClick={() => {setIsMenuOpen(false); scrollToSection('group-travel');}}>Group Travel</a>
-              <a href="#ar-vr" onClick={() => {setIsMenuOpen(false); scrollToSection('ar-vr');}}>AR/VR</a>
+              <a href="#home" onClick={() => { setIsMenuOpen(false); scrollToSection('home'); }}>Home</a>
+              <a href="#destinations" onClick={() => { setIsMenuOpen(false); scrollToSection('destinations'); }}>Destinations</a>
+              <a href="#districts" onClick={() => { setIsMenuOpen(false); scrollToSection('districts'); }}>Districts</a>
+              <a href="#guides" onClick={() => { setIsMenuOpen(false); scrollToSection('guides'); }}>Guides</a>
+              <a href="#group-travel" onClick={() => { setIsMenuOpen(false); scrollToSection('group-travel'); }}>Group Travel</a>
+              <a href="#ar-vr" onClick={() => { setIsMenuOpen(false); scrollToSection('ar-vr'); }}>AR/VR</a>
               <button className="btn btn-outline history-btn" onClick={toggleHistory}>
                 <BookOpen size={16} />
                 History
@@ -336,10 +336,10 @@ const LandingPage = ({ onEnter }) => {
       {/* Hero Section with Video Background */}
       <section id="home" className="hero-section">
         <div className="video-background">
-          <video 
-            autoPlay 
-            muted 
-            loop 
+          <video
+            autoPlay
+            muted
+            loop
             playsInline
             className="hero-video"
           >
@@ -348,7 +348,7 @@ const LandingPage = ({ onEnter }) => {
           </video>
           <div className="video-overlay"></div>
         </div>
-        
+
         <div className="hero-content">
           <div className="container">
             <div className={`hero-text ${isLoaded ? 'fade-in-up' : ''}`}>
@@ -356,7 +356,7 @@ const LandingPage = ({ onEnter }) => {
                 Discover the <span className="highlight">Land of Forests</span>
               </h1>
               <p className="hero-subtitle">
-                Experience Jharkhand's majestic waterfalls, rich tribal heritage, 
+                Experience Jharkhand's majestic waterfalls, rich tribal heritage,
                 and untouched natural beauty through our smart digital tourism platform
               </p>
               <div className="hero-stats">
@@ -382,7 +382,7 @@ const LandingPage = ({ onEnter }) => {
             </div>
           </div>
         </div>
-        
+
         <div className="scroll-indicator" onClick={() => scrollToSection('destinations')}>
           <ChevronDown size={24} />
         </div>
@@ -397,28 +397,28 @@ const LandingPage = ({ onEnter }) => {
               <h2>History of Jharkhand</h2>
               <div className="history-text">
                 <p>
-                  <strong>Ancient Era:</strong> Jharkhand, meaning "Land of Forests," has been inhabited since the Stone Age. 
-                  The region was home to various tribal communities including the Mundas, Santhals, Oraons, and Ho tribes, 
+                  <strong>Ancient Era:</strong> Jharkhand, meaning "Land of Forests," has been inhabited since the Stone Age.
+                  The region was home to various tribal communities including the Mundas, Santhals, Oraons, and Ho tribes,
                   who developed rich cultural traditions and sustainable forest management practices.
                 </p>
                 <p>
-                  <strong>Medieval Period:</strong> The area came under various rulers including the Chero dynasty, 
-                  Nagvanshi dynasty, and later the Mughal Empire. The tribal communities maintained their distinct 
+                  <strong>Medieval Period:</strong> The area came under various rulers including the Chero dynasty,
+                  Nagvanshi dynasty, and later the Mughal Empire. The tribal communities maintained their distinct
                   identity and continued their traditional way of life despite external influences.
                 </p>
                 <p>
-                  <strong>British Era:</strong> During British rule, the region was part of Bihar and was known for 
-                  its rich mineral resources. The discovery of coal and iron ore led to industrial development, 
+                  <strong>British Era:</strong> During British rule, the region was part of Bihar and was known for
+                  its rich mineral resources. The discovery of coal and iron ore led to industrial development,
                   but also displacement of tribal communities.
                 </p>
                 <p>
-                  <strong>Modern Jharkhand:</strong> After decades of struggle for a separate state, Jharkhand was 
-                  carved out of Bihar on November 15, 2000, becoming India's 28th state. The state is rich in 
+                  <strong>Modern Jharkhand:</strong> After decades of struggle for a separate state, Jharkhand was
+                  carved out of Bihar on November 15, 2000, becoming India's 28th state. The state is rich in
                   minerals, forests, and cultural diversity, with over 30 tribal communities calling it home.
                 </p>
                 <p>
-                  <strong>Cultural Heritage:</strong> Jharkhand is renowned for its tribal art, music, dance forms 
-                  like Chhau and Jhumair, and traditional crafts. The state celebrates numerous festivals including 
+                  <strong>Cultural Heritage:</strong> Jharkhand is renowned for its tribal art, music, dance forms
+                  like Chhau and Jhumair, and traditional crafts. The state celebrates numerous festivals including
                   Sarhul, Karma, and Sohrai, reflecting its deep connection with nature.
                 </p>
               </div>
@@ -434,7 +434,7 @@ const LandingPage = ({ onEnter }) => {
             <h2>Featured Destinations</h2>
             <p>Discover the most enchanting places in the Land of Forests</p>
           </div>
-          
+
           <div className="destinations-grid">
             {famousPlaces.map((place) => (
               <div key={place.id} className="destination-card">
@@ -481,7 +481,7 @@ const LandingPage = ({ onEnter }) => {
             <h2>Explore by Districts</h2>
             <p>Discover Jharkhand's treasures district by district</p>
           </div>
-          
+
           <div className="districts-navigation">
             {Object.entries(districts).map(([key, district]) => (
               <button
@@ -493,7 +493,7 @@ const LandingPage = ({ onEnter }) => {
               </button>
             ))}
           </div>
-          
+
           <div className="district-content">
             <div className="district-info">
               <div className="district-image">
@@ -530,7 +530,7 @@ const LandingPage = ({ onEnter }) => {
             <h2>Expert Local Guides</h2>
             <p>Connect with verified local experts who know Jharkhand's hidden gems</p>
           </div>
-          
+
           <div className="guides-grid">
             {localGuides.map((guide) => (
               <div key={guide.id} className="guide-card">
@@ -562,10 +562,10 @@ const LandingPage = ({ onEnter }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="guide-details">
                   <p className="guide-description">{guide.description}</p>
-                  
+
                   <div className="specializations">
                     <h4>Specializations:</h4>
                     <div className="spec-tags">
@@ -574,7 +574,7 @@ const LandingPage = ({ onEnter }) => {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="languages">
                     <h4>Languages:</h4>
                     <div className="lang-tags">
@@ -586,7 +586,7 @@ const LandingPage = ({ onEnter }) => {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="guide-footer">
                     <div className="price-location">
                       <span className="price">{guide.price}</span>
@@ -596,7 +596,7 @@ const LandingPage = ({ onEnter }) => {
                       </span>
                     </div>
                     <div className="guide-actions">
-                      <button 
+                      <button
                         className="btn btn-outline"
                         onClick={() => setSelectedGuide(guide)}
                       >
@@ -622,7 +622,7 @@ const LandingPage = ({ onEnter }) => {
             <h2>Join Group Adventures</h2>
             <p>Connect with fellow travelers and explore Jharkhand together</p>
           </div>
-          
+
           <div className="group-travel-grid">
             {groupTravelOptions.map((group) => (
               <div key={group.id} className="group-card">
@@ -635,7 +635,7 @@ const LandingPage = ({ onEnter }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="group-content">
                   <h3>{group.title}</h3>
                   <div className="group-info">
@@ -652,7 +652,7 @@ const LandingPage = ({ onEnter }) => {
                       <span>{group.duration}</span>
                     </div>
                   </div>
-                  
+
                   <div className="activities">
                     <h4>Activities:</h4>
                     <div className="activity-tags">
@@ -661,7 +661,7 @@ const LandingPage = ({ onEnter }) => {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="group-details">
                     <div className="organizer">
                       <strong>Organizer:</strong> {group.organizer}
@@ -670,7 +670,7 @@ const LandingPage = ({ onEnter }) => {
                       <strong>Age Group:</strong> {group.ageGroup}
                     </div>
                   </div>
-                  
+
                   <div className="group-footer">
                     <div className="price">
                       <span className="amount">{group.pricePerPerson}</span>
@@ -685,7 +685,7 @@ const LandingPage = ({ onEnter }) => {
               </div>
             ))}
           </div>
-          
+
           <div className="create-group-cta">
             <div className="cta-content">
               <h3>Want to create your own group?</h3>
@@ -706,7 +706,7 @@ const LandingPage = ({ onEnter }) => {
             <h2>AR/VR Experiences</h2>
             <p>Immerse yourself in Jharkhand's beauty with cutting-edge technology</p>
           </div>
-          
+
           <div className="ar-vr-grid">
             {arVrLocations.map((location) => (
               <div key={location.id} className="ar-vr-card">
@@ -723,11 +723,11 @@ const LandingPage = ({ onEnter }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="ar-vr-content">
                   <h3>{location.name}</h3>
                   <p>{location.description}</p>
-                  
+
                   <div className="features">
                     <h4>Features:</h4>
                     <ul>
@@ -736,9 +736,9 @@ const LandingPage = ({ onEnter }) => {
                       ))}
                     </ul>
                   </div>
-                  
+
                   <div className="ar-vr-actions">
-                    <button 
+                    <button
                       className="btn btn-primary experience-btn"
                       onClick={() => setActiveARLocation(location)}
                     >
@@ -754,7 +754,7 @@ const LandingPage = ({ onEnter }) => {
               </div>
             ))}
           </div>
-          
+
           <div className="ar-vr-info">
             <div className="info-cards">
               <div className="info-card">
@@ -790,7 +790,7 @@ const LandingPage = ({ onEnter }) => {
             <h2>Smart Tourism Features</h2>
             <p>Experience Jharkhand with our AI-powered digital platform</p>
           </div>
-          
+
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
@@ -799,7 +799,7 @@ const LandingPage = ({ onEnter }) => {
               <h3>Smart Trip Planning</h3>
               <p>AI-powered personalized itineraries based on your preferences, budget, and travel dates</p>
             </div>
-            
+
             <div className="feature-card">
               <div className="feature-icon">
                 <Users size={32} />
@@ -807,7 +807,7 @@ const LandingPage = ({ onEnter }) => {
               <h3>Verified Local Guides</h3>
               <p>Connect with blockchain-verified local guides who know the hidden gems of Jharkhand</p>
             </div>
-            
+
             <div className="feature-card">
               <div className="feature-icon">
                 <Award size={32} />
@@ -853,13 +853,13 @@ const LandingPage = ({ onEnter }) => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="guide-modal-details">
                 <div className="description">
                   <h3>About</h3>
                   <p>{selectedGuide.description}</p>
                 </div>
-                
+
                 <div className="contact-info">
                   <h3>Contact Information</h3>
                   <div className="contact-items">
@@ -877,7 +877,7 @@ const LandingPage = ({ onEnter }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="modal-actions">
                   <button className="btn btn-primary">
                     <MessageCircle size={18} />
