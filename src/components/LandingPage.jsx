@@ -22,7 +22,13 @@ import {
   Languages,
   Heart,
   Share2,
-  MessageCircle
+  MessageCircle,
+  Search,
+  Filter,
+  User,
+  Leaf,
+  CreditCard,
+  AlertTriangle
 } from 'lucide-react';
 import './LandingPage.css';
 
@@ -35,6 +41,8 @@ const LandingPage = ({ onEnter }) => {
   const [activeDistrict, setActiveDistrict] = useState('ranchi');
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [activeARLocation, setActiveARLocation] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDestination, setSelectedDestination] = useState(null);
 
   const languages = ['English', 'Hindi', 'Santhali', 'Ho', 'Mundari'];
 
@@ -44,6 +52,7 @@ const LandingPage = ({ onEnter }) => {
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
   };
 
   const toggleHistory = () => {
@@ -301,30 +310,20 @@ const LandingPage = ({ onEnter }) => {
               <h2>Jharkhand Tourism</h2>
             </div>
             <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-              <a href="#home" onClick={() => { setIsMenuOpen(false); scrollToSection('home'); }}>Home</a>
-              <a href="#destinations" onClick={() => { setIsMenuOpen(false); scrollToSection('destinations'); }}>Destinations</a>
-              <a href="#districts" onClick={() => { setIsMenuOpen(false); scrollToSection('districts'); }}>Districts</a>
-              <a href="#guides" onClick={() => { setIsMenuOpen(false); scrollToSection('guides'); }}>Guides</a>
-              <a href="#group-travel" onClick={() => { setIsMenuOpen(false); scrollToSection('group-travel'); }}>Group Travel</a>
-              <a href="#ar-vr" onClick={() => { setIsMenuOpen(false); scrollToSection('ar-vr'); }}>AR/VR</a>
+              <a href="#home" onClick={() => scrollToSection('home')}>Home</a>
+              <a href="#features" onClick={() => scrollToSection('features')}>Features</a>
+              <a href="#destinations" onClick={() => scrollToSection('destinations')}>Destinations</a>
+              <a href="#guides" onClick={() => scrollToSection('guides')}>Guides</a>
+              <a href="#plan" onClick={() => scrollToSection('plan')}>Plan Trip</a>
+              <a href="#group-travel" onClick={() => scrollToSection('group-travel')}>Group Travel</a>
+              <a href="#ar-vr" onClick={() => scrollToSection('ar-vr')}>AR/VR</a>
+              <a href="#auth" onClick={() => scrollToSection('auth')}>Sign In/Enroll</a>
+              <a href="#payment" onClick={() => scrollToSection('payment')}>Payment</a>
+              <a href="#emergency" onClick={() => scrollToSection('emergency')}>Emergency</a>
               <button className="btn btn-outline history-btn" onClick={toggleHistory}>
                 <BookOpen size={16} />
                 History
               </button>
-              <div className="language-selector">
-                <button className="language-btn" onClick={toggleLanguageDropdown}>
-                  <Globe size={16} />
-                  {selectedLanguage}
-                  <ChevronDown size={14} />
-                </button>
-                {showLanguageDropdown && (
-                  <div className="language-dropdown">
-                    {languages.map((lang) => (
-                      <button key={lang} onClick={() => selectLanguage(lang)}>{lang}</button>
-                    ))}
-                  </div>
-                )}
-              </div>
             </div>
             <button className="mobile-menu-btn" onClick={toggleMenu}>
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -336,19 +335,12 @@ const LandingPage = ({ onEnter }) => {
       {/* Hero Section with Video Background */}
       <section id="home" className="hero-section">
         <div className="video-background">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="hero-video"
-          >
+          <video autoPlay muted loop playsInline className="hero-video">
             <source src="https://videos.pexels.com/video-files/2499611/2499611-uhd_2560_1440_25fps.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="video-overlay"></div>
         </div>
-
         <div className="hero-content">
           <div className="container">
             <div className={`hero-text ${isLoaded ? 'fade-in-up' : ''}`}>
@@ -374,19 +366,639 @@ const LandingPage = ({ onEnter }) => {
                 </div>
               </div>
               <div className="hero-buttons">
-                <button className="btn btn-primary" onClick={onEnter}>
-                  <MapPin size={18} />
-                  Start Journey
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="scroll-indicator" onClick={() => scrollToSection('features')}>
+          <ChevronDown size={24} />
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="features-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Smart Tourism Features</h2>
+            <p>Experience Jharkhand with our AI-powered digital platform</p>
+          </div>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">
+                <MapPin size={32} />
+              </div>
+              <h3>Smart Trip Planning</h3>
+              <p>AI-powered personalized itineraries based on your preferences, budget, and travel dates</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <Users size={32} />
+              </div>
+              <h3>Verified Local Guides</h3>
+              <p>Connect with blockchain-verified local guides who know the hidden gems of Jharkhand</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <Award size={32} />
+              </div>
+              <h3>Authentic Experiences</h3>
+              <p>Immerse yourself in tribal culture, traditional crafts, and sustainable eco-tourism</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Destinations Section */}
+      <section id="destinations" className="destinations-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Featured Destinations</h2>
+            <p>Discover the most enchanting places in the Land of Forests</p>
+          </div>
+          <div className="search-section">
+            <div className="search-bar">
+              <Search size={20} />
+              <input
+                type="text"
+                placeholder="Search destinations, activities, or experiences..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button className="filter-btn">
+                <Filter size={18} />
+              </button>
+            </div>
+          </div>
+          <div className="destinations-grid">
+            {famousPlaces.map((place) => (
+              <div key={place.id} className="destination-card" onClick={() => setSelectedDestination(place)}>
+                <div className="card-image">
+                  <img src={place.image} alt={place.name} />
+                  <div className="card-overlay">
+                    <button className="favorite-btn">
+                      <Heart size={18} />
+                    </button>
+                    <div className="rating">
+                      <Star size={16} fill="currentColor" />
+                      <span>{place.rating}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="card-content">
+                  <h3>{place.name}</h3>
+                  <p className="card-description">{place.description}</p>
+                  <div className="card-highlights">
+                    <h4>Highlights:</h4>
+                    <ul>
+                      {place.highlights.slice(0, 2).map((highlight, index) => (
+                        <li key={index}>{highlight}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="card-footer">
+                    <div className="card-info">
+                      <span className="district-tag">{place.district} District</span>
+                    </div>
+                    <button className="btn btn-outline read-more-btn" onClick={() => setSelectedDestination(place)}>
+                      Read More
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Explore by Districts Section */}
+      <section id="districts" className="districts-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Explore by Districts</h2>
+            <p>Discover Jharkhand's treasures district by district</p>
+          </div>
+          <div className="districts-navigation">
+            {Object.entries(districts).map(([key, district]) => (
+              <button
+                key={key}
+                className={`district-tab ${activeDistrict === key ? 'active' : ''}`}
+                onClick={() => setActiveDistrict(key)}
+              >
+                {district.name}
+              </button>
+            ))}
+          </div>
+          <div className="district-content">
+            <div className="district-info">
+              <div className="district-image">
+                <img src={districts[activeDistrict].image} alt={districts[activeDistrict].name} />
+              </div>
+              <div className="district-details">
+                <h3>{districts[activeDistrict].name} District</h3>
+                <p>{districts[activeDistrict].description}</p>
+                <div className="places-list">
+                  <h4>Popular Places:</h4>
+                  <div className="places-grid">
+                    {districts[activeDistrict].places.map((place, index) => (
+                      <div key={index} className="place-tag">
+                        <MapPin size={14} />
+                        {place}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button className="btn btn-primary district-explore-btn" onClick={onEnter}>
+                  <Navigation size={18} />
+                  Explore {districts[activeDistrict].name}
                 </button>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="scroll-indicator" onClick={() => scrollToSection('destinations')}>
-          <ChevronDown size={24} />
+      {/* Expert Local Guides Section */}
+      <section id="guides" className="guides-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Expert Local Guides</h2>
+            <p>Connect with verified local experts who know Jharkhand's hidden gems</p>
+          </div>
+          <div className="guides-grid">
+            {localGuides.map((guide) => (
+              <div key={guide.id} className="guide-card">
+                <div className="guide-header">
+                  <div className="guide-image">
+                    <img src={guide.image} alt={guide.name} />
+                    {guide.verified && (
+                      <div className="verification-badge">
+                        <Shield size={16} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="guide-basic-info">
+                    <h3>{guide.name}</h3>
+                    <p className="speciality">{guide.speciality}</p>
+                    <div className="guide-stats">
+                      <div className="stat">
+                        <Star size={14} fill="currentColor" />
+                        <span>{guide.rating}</span>
+                      </div>
+                      <div className="stat">
+                        <Users size={14} />
+                        <span>{guide.tours} tours</span>
+                      </div>
+                      <div className="stat">
+                        <Clock size={14} />
+                        <span>{guide.experience}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="guide-details">
+                  <p className="guide-description">{guide.description}</p>
+                  <div className="specializations">
+                    <h4>Specializations:</h4>
+                    <div className="spec-tags">
+                      {guide.specializations.map((spec, index) => (
+                        <span key={index} className="spec-tag">{spec}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="languages">
+                    <h4>Languages:</h4>
+                    <div className="lang-tags">
+                      {guide.languages.map((lang, index) => (
+                        <span key={index} className="lang-tag">
+                          <Languages size={12} />
+                          {lang}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="guide-footer">
+                    <div className="price-location">
+                      <span className="price">{guide.price}</span>
+                      <span className="location">
+                        <MapPin size={14} />
+                        {guide.location}
+                      </span>
+                    </div>
+                    <div className="guide-actions">
+                      <button
+                        className="btn btn-outline"
+                        onClick={() => setSelectedGuide(guide)}
+                      >
+                        View Profile
+                      </button>
+                      <button className="btn btn-primary">
+                        <MessageCircle size={16} />
+                        Contact
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Trip Planning Section */}
+      <section id="plan" className="plan-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>AI Trip Planner</h2>
+            <p>Let our AI create the perfect itinerary based on your preferences</p>
+          </div>
+          <div className="planner-form">
+            <div className="form-row">
+              <div className="form-group">
+                <label>Destination Interests</label>
+                <div className="checkbox-group">
+                  <label><input type="checkbox" /> Waterfalls</label>
+                  <label><input type="checkbox" /> Wildlife</label>
+                  <label><input type="checkbox" /> Cultural Sites</label>
+                  <label><input type="checkbox" /> Hill Stations</label>
+                  <label><input type="checkbox" /> Tribal Villages</label>
+                  <label><input type="checkbox" /> Religious Sites</label>
+                </div>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Travel Dates</label>
+                <input type="date" />
+              </div>
+              <div className="form-group">
+                <label>Duration</label>
+                <select>
+                  <option>1-2 days</option>
+                  <option>3-5 days</option>
+                  <option>1 week</option>
+                  <option>2+ weeks</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Budget Range</label>
+                <select>
+                  <option>₹5,000 - ₹10,000</option>
+                  <option>₹10,000 - ₹25,000</option>
+                  <option>₹25,000 - ₹50,000</option>
+                  <option>₹50,000+</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Group Size</label>
+                <select>
+                  <option>Solo</option>
+                  <option>2-3 people</option>
+                  <option>4-6 people</option>
+                  <option>7+ people</option>
+                </select>
+              </div>
+            </div>
+            <button className="btn btn-primary trip-plan">Generate AI Itinerary</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Group Travel Section */}
+      <section id="group-travel" className="group-travel-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Join Group Adventures</h2>
+            <p>Connect with fellow travelers and explore Jharkhand together</p>
+          </div>
+          <div className="group-travel-grid">
+            {groupTravelOptions.map((group) => (
+              <div key={group.id} className="group-card">
+                <div className="group-image">
+                  <img src={group.image} alt={group.title} />
+                  <div className="group-overlay">
+                    <div className="members-count">
+                      <Users size={16} />
+                      <span>{group.currentMembers}/{group.maxMembers}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="group-content">
+                  <h3>{group.title}</h3>
+                  <div className="group-info">
+                    <div className="info-item">
+                      <MapPin size={16} />
+                      <span>{group.destination}</span>
+                    </div>
+                    <div className="info-item">
+                      <Calendar size={16} />
+                      <span>{group.date}</span>
+                    </div>
+                    <div className="info-item">
+                      <Clock size={16} />
+                      <span>{group.duration}</span>
+                    </div>
+                  </div>
+                  <div className="activities">
+                    <h4>Activities:</h4>
+                    <div className="activity-tags">
+                      {group.activities.map((activity, index) => (
+                        <span key={index} className="activity-tag">{activity}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="group-details">
+                    <div className="organizer">
+                      <strong>Organizer:</strong> {group.organizer}
+                    </div>
+                    <div className="age-group">
+                      <strong>Age Group:</strong> {group.ageGroup}
+                    </div>
+                  </div>
+                  <div className="group-footer">
+                    <div className="price">
+                      <span className="amount">{group.pricePerPerson}</span>
+                      <span className="per-person">per person</span>
+                    </div>
+                    <button className="btn btn-primary join-btn">
+                      <UserPlus size={16} />
+                      Join Group
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="create-group-cta">
+            <div className="cta-content">
+              <h3>Want to create your own group?</h3>
+              <p>Start your own adventure and invite others to join</p>
+              <button className="btn btn-outline">
+                <UserPlus size={18} />
+                Create New Group
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AR/VR Section */}
+      <section id="ar-vr" className="ar-vr-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>AR/VR Experiences</h2>
+            <p>Immerse yourself in Jharkhand's beauty with cutting-edge technology</p>
+          </div>
+          <div className="ar-vr-grid">
+            {arVrLocations.map((location) => (
+              <div key={location.id} className="ar-vr-card">
+                <div className="ar-vr-image">
+                  <img src={location.image} alt={location.name} />
+                  <div className="ar-vr-overlay">
+                    <div className="experience-type">
+                      <Eye size={16} />
+                      {location.type}
+                    </div>
+                    <div className="duration">
+                      <Clock size={16} />
+                      {location.duration}
+                    </div>
+                  </div>
+                </div>
+                <div className="ar-vr-content">
+                  <h3>{location.name}</h3>
+                  <p>{location.description}</p>
+                  <div className="features">
+                    <h4>Features:</h4>
+                    <ul>
+                      {location.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="ar-vr-actions">
+                    <button
+                      className="btn btn-primary experience-btn"
+                      onClick={() => setActiveARLocation(location)}
+                    >
+                      <Camera size={16} />
+                      Start Experience
+                    </button>
+                    <button className="btn btn-outline share-btn">
+                      <Share2 size={16} />
+                      Share
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="ar-vr-info">
+            <div className="info-cards">
+              <div className="info-card">
+                <div className="info-icon">
+                  <Eye size={24} />
+                </div>
+                <h4>VR Headset Compatible</h4>
+                <p>Works with all major VR headsets</p>
+              </div>
+              <div className="info-card">
+                <div className="info-icon">
+                  <Camera size={24} />
+                </div>
+                <h4>AR Mobile Ready</h4>
+                <p>Use your smartphone for AR experiences</p>
+              </div>
+              <div className="info-card">
+                <div className="info-icon">
+                  <Globe size={24} />
+                </div>
+                <h4>360° Immersion</h4>
+                <p>Full panoramic virtual tours</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sign In/Enroll Section */}
+      <section id="auth" className="auth-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Sign In or Enroll</h2>
+            <p>Access personalized features or enroll as a verified guide or artisan</p>
+          </div>
+          <div className="auth-grid">
+            <div className="auth-card">
+              <div className="auth-icon">
+                <User size={32} />
+              </div>
+              <h3>Tourist Sign In</h3>
+              <p>Sign in to plan trips, book guides, and save favorites</p>
+              <button className="btn btn-primary">
+                Sign In
+              </button>
+            </div>
+            <div className="auth-card">
+              <div className="auth-icon">
+                <UserPlus size={32} />
+              </div>
+              <h3>Guide Enrollment</h3>
+              <p>Join as a government-verified local guide</p>
+              <button className="btn btn-outline">
+                Enroll as Guide
+              </button>
+            </div>
+            <div className="auth-card">
+              <div className="auth-icon">
+                <Award size={32} />
+              </div>
+              <h3>Artisan Enrollment</h3>
+              <p>Showcase your crafts with government verification</p>
+              <button className="btn btn-outline">
+                Enroll as Artisan
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Eco-Friendly Options Section */}
+      <section id="eco" className="eco-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Eco-Friendly Tourism</h2>
+            <p>Explore sustainable travel options to preserve Jharkhand's natural beauty</p>
+          </div>
+          <div className="eco-grid">
+            <div className="eco-card">
+              <div className="eco-icon">
+                <Leaf size={32} />
+              </div>
+              <h3>Eco-Friendly Stays</h3>
+              <p>Choose sustainable accommodations with minimal environmental impact</p>
+              <button className="btn btn-primary">
+                Explore Stays
+              </button>
+            </div>
+            <div className="eco-card">
+              <div className="eco-icon">
+                <Globe size={32} />
+              </div>
+              <h3>Green Tours</h3>
+              <p>Join eco-conscious tours with low carbon footprint</p>
+              <button className="btn btn-outline">
+                View Tours
+              </button>
+            </div>
+            <div className="eco-card">
+              <div className="eco-icon">
+                <Heart size={32} />
+              </div>
+              <h3>Community Support</h3>
+              <p>Support local communities through sustainable practices</p>
+              <button className="btn btn-outline">
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Payment Section */}
+      <section id="payment" className="payment-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Secure Payment</h2>
+            <p>Choose your preferred payment method for bookings</p>
+          </div>
+          <div className="payment-grid">
+            <div className="payment-card">
+              <div className="payment-icon">
+                <CreditCard size={32} />
+              </div>
+              <h3>Credit/Debit Card</h3>
+              <p>Pay securely with Visa, MasterCard, or other cards</p>
+              <button className="btn btn-primary">
+                Pay Now
+              </button>
+            </div>
+            <div className="payment-card">
+              <div className="payment-icon">
+                <Globe size={32} />
+              </div>
+              <h3>UPI</h3>
+              <p>Use UPI for quick and secure payments</p>
+              <button className="btn btn-outline">
+                Pay with UPI
+              </button>
+            </div>
+            <div className="payment-card">
+              <div className="payment-icon">
+                <CreditCard size={32} />
+              </div>
+              <h3>Net Banking</h3>
+              <p>Pay directly through your bank account</p>
+              <button className="btn btn-outline">
+                Pay with Net Banking
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Emergency and Safety Measures Section */}
+      <section id="emergency" className="emergency-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Smart Emergency & Safety</h2>
+            <p>Access emergency contacts and nearby facilities for a safe journey</p>
+          </div>
+          <div className="emergency-grid">
+            <div className="emergency-card">
+              <div className="emergency-icon">
+                <Phone size={32} />
+              </div>
+              <h3>Emergency Helpline</h3>
+              <p>Contact our 24/7 helpline for immediate assistance</p>
+              <p><strong>Helpline:</strong> +91 1800-123-4567</p>
+              <button className="btn btn-primary">
+                Call Now
+              </button>
+            </div>
+            <div className="emergency-card">
+              <div className="emergency-icon">
+                <MapPin size={32} />
+              </div>
+              <h3>Nearby Facilities</h3>
+              <p>Find nearby hospitals, police stations, and more</p>
+              <button className="btn btn-outline">
+                Locate Facilities
+              </button>
+            </div>
+            <div className="emergency-card">
+              <div className="emergency-icon">
+                <AlertTriangle size={32} />
+              </div>
+              <h3>Safety Tips</h3>
+              <p>Access safety guidelines for a secure travel experience</p>
+              <button className="btn btn-outline">
+                View Tips
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Chatbot Button */}
+      <div className="chatbot-button">
+        <button className="btn btn-primary">
+          <MessageCircle size={24} />
+          Chat with AI Assistant
+        </button>
+      </div>
 
       {/* History Modal */}
       {showHistory && (
@@ -427,398 +1039,6 @@ const LandingPage = ({ onEnter }) => {
         </div>
       )}
 
-      {/* Featured Destinations */}
-      <section id="destinations" className="destinations-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Featured Destinations</h2>
-            <p>Discover the most enchanting places in the Land of Forests</p>
-          </div>
-
-          <div className="destinations-grid">
-            {famousPlaces.map((place) => (
-              <div key={place.id} className="destination-card">
-                <div className="card-image">
-                  <img src={place.image} alt={place.name} />
-                  <div className="card-overlay">
-                    <div className="rating">
-                      <Star size={16} fill="currentColor" />
-                      <span>{place.rating}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-content">
-                  <h3>{place.name}</h3>
-                  <p className="card-description">{place.description}</p>
-                  <div className="card-highlights">
-                    <h4>Highlights:</h4>
-                    <ul>
-                      {place.highlights.slice(0, 2).map((highlight, index) => (
-                        <li key={index}>{highlight}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="card-footer">
-                    <div className="card-info">
-                      <span className="district-tag">{place.district} District</span>
-                    </div>
-                    <button className="btn btn-outline read-more-btn" onClick={onEnter}>
-                      Read More
-                      <ArrowRight size={16} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Explore by Districts */}
-      <section id="districts" className="districts-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Explore by Districts</h2>
-            <p>Discover Jharkhand's treasures district by district</p>
-          </div>
-
-          <div className="districts-navigation">
-            {Object.entries(districts).map(([key, district]) => (
-              <button
-                key={key}
-                className={`district-tab ${activeDistrict === key ? 'active' : ''}`}
-                onClick={() => setActiveDistrict(key)}
-              >
-                {district.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="district-content">
-            <div className="district-info">
-              <div className="district-image">
-                <img src={districts[activeDistrict].image} alt={districts[activeDistrict].name} />
-              </div>
-              <div className="district-details">
-                <h3>{districts[activeDistrict].name} District</h3>
-                <p>{districts[activeDistrict].description}</p>
-                <div className="places-list">
-                  <h4>Popular Places:</h4>
-                  <div className="places-grid">
-                    {districts[activeDistrict].places.map((place, index) => (
-                      <div key={index} className="place-tag">
-                        <MapPin size={14} />
-                        {place}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <button className="btn btn-primary district-explore-btn" onClick={onEnter}>
-                  <Navigation size={18} />
-                  Explore {districts[activeDistrict].name}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Expert Local Guides */}
-      <section id="guides" className="guides-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Expert Local Guides</h2>
-            <p>Connect with verified local experts who know Jharkhand's hidden gems</p>
-          </div>
-
-          <div className="guides-grid">
-            {localGuides.map((guide) => (
-              <div key={guide.id} className="guide-card">
-                <div className="guide-header">
-                  <div className="guide-image">
-                    <img src={guide.image} alt={guide.name} />
-                    {guide.verified && (
-                      <div className="verification-badge">
-                        <Shield size={16} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="guide-basic-info">
-                    <h3>{guide.name}</h3>
-                    <p className="speciality">{guide.speciality}</p>
-                    <div className="guide-stats">
-                      <div className="stat">
-                        <Star size={14} fill="currentColor" />
-                        <span>{guide.rating}</span>
-                      </div>
-                      <div className="stat">
-                        <Users size={14} />
-                        <span>{guide.tours} tours</span>
-                      </div>
-                      <div className="stat">
-                        <Clock size={14} />
-                        <span>{guide.experience}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="guide-details">
-                  <p className="guide-description">{guide.description}</p>
-
-                  <div className="specializations">
-                    <h4>Specializations:</h4>
-                    <div className="spec-tags">
-                      {guide.specializations.map((spec, index) => (
-                        <span key={index} className="spec-tag">{spec}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="languages">
-                    <h4>Languages:</h4>
-                    <div className="lang-tags">
-                      {guide.languages.map((lang, index) => (
-                        <span key={index} className="lang-tag">
-                          <Languages size={12} />
-                          {lang}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="guide-footer">
-                    <div className="price-location">
-                      <span className="price">{guide.price}</span>
-                      <span className="location">
-                        <MapPin size={14} />
-                        {guide.location}
-                      </span>
-                    </div>
-                    <div className="guide-actions">
-                      <button
-                        className="btn btn-outline"
-                        onClick={() => setSelectedGuide(guide)}
-                      >
-                        View Profile
-                      </button>
-                      <button className="btn btn-primary">
-                        <MessageCircle size={16} />
-                        Contact
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Group Travel Section */}
-      <section id="group-travel" className="group-travel-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Join Group Adventures</h2>
-            <p>Connect with fellow travelers and explore Jharkhand together</p>
-          </div>
-
-          <div className="group-travel-grid">
-            {groupTravelOptions.map((group) => (
-              <div key={group.id} className="group-card">
-                <div className="group-image">
-                  <img src={group.image} alt={group.title} />
-                  <div className="group-overlay">
-                    <div className="members-count">
-                      <Users size={16} />
-                      <span>{group.currentMembers}/{group.maxMembers}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="group-content">
-                  <h3>{group.title}</h3>
-                  <div className="group-info">
-                    <div className="info-item">
-                      <MapPin size={16} />
-                      <span>{group.destination}</span>
-                    </div>
-                    <div className="info-item">
-                      <Calendar size={16} />
-                      <span>{group.date}</span>
-                    </div>
-                    <div className="info-item">
-                      <Clock size={16} />
-                      <span>{group.duration}</span>
-                    </div>
-                  </div>
-
-                  <div className="activities">
-                    <h4>Activities:</h4>
-                    <div className="activity-tags">
-                      {group.activities.map((activity, index) => (
-                        <span key={index} className="activity-tag">{activity}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="group-details">
-                    <div className="organizer">
-                      <strong>Organizer:</strong> {group.organizer}
-                    </div>
-                    <div className="age-group">
-                      <strong>Age Group:</strong> {group.ageGroup}
-                    </div>
-                  </div>
-
-                  <div className="group-footer">
-                    <div className="price">
-                      <span className="amount">{group.pricePerPerson}</span>
-                      <span className="per-person">per person</span>
-                    </div>
-                    <button className="btn btn-primary join-btn">
-                      <UserPlus size={16} />
-                      Join Group
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="create-group-cta">
-            <div className="cta-content">
-              <h3>Want to create your own group?</h3>
-              <p>Start your own adventure and invite others to join</p>
-              <button className="btn btn-outline">
-                <UserPlus size={18} />
-                Create New Group
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AR/VR Section */}
-      <section id="ar-vr" className="ar-vr-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>AR/VR Experiences</h2>
-            <p>Immerse yourself in Jharkhand's beauty with cutting-edge technology</p>
-          </div>
-
-          <div className="ar-vr-grid">
-            {arVrLocations.map((location) => (
-              <div key={location.id} className="ar-vr-card">
-                <div className="ar-vr-image">
-                  <img src={location.image} alt={location.name} />
-                  <div className="ar-vr-overlay">
-                    <div className="experience-type">
-                      <Eye size={16} />
-                      {location.type}
-                    </div>
-                    <div className="duration">
-                      <Clock size={16} />
-                      {location.duration}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="ar-vr-content">
-                  <h3>{location.name}</h3>
-                  <p>{location.description}</p>
-
-                  <div className="features">
-                    <h4>Features:</h4>
-                    <ul>
-                      {location.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="ar-vr-actions">
-                    <button
-                      className="btn btn-primary experience-btn"
-                      onClick={() => setActiveARLocation(location)}
-                    >
-                      <Camera size={16} />
-                      Start Experience
-                    </button>
-                    <button className="btn btn-outline share-btn">
-                      <Share2 size={16} />
-                      Share
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="ar-vr-info">
-            <div className="info-cards">
-              <div className="info-card">
-                <div className="info-icon">
-                  <Eye size={24} />
-                </div>
-                <h4>VR Headset Compatible</h4>
-                <p>Works with all major VR headsets</p>
-              </div>
-              <div className="info-card">
-                <div className="info-icon">
-                  <Camera size={24} />
-                </div>
-                <h4>AR Mobile Ready</h4>
-                <p>Use your smartphone for AR experiences</p>
-              </div>
-              <div className="info-card">
-                <div className="info-icon">
-                  <Globe size={24} />
-                </div>
-                <h4>360° Immersion</h4>
-                <p>Full panoramic virtual tours</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="features-section">
-        <div className="container">
-          <div className="section-header">
-            <h2>Smart Tourism Features</h2>
-            <p>Experience Jharkhand with our AI-powered digital platform</p>
-          </div>
-
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">
-                <MapPin size={32} />
-              </div>
-              <h3>Smart Trip Planning</h3>
-              <p>AI-powered personalized itineraries based on your preferences, budget, and travel dates</p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <Users size={32} />
-              </div>
-              <h3>Verified Local Guides</h3>
-              <p>Connect with blockchain-verified local guides who know the hidden gems of Jharkhand</p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <Award size={32} />
-              </div>
-              <h3>Authentic Experiences</h3>
-              <p>Immerse yourself in tribal culture, traditional crafts, and sustainable eco-tourism</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Guide Profile Modal */}
       {selectedGuide && (
         <div className="modal-overlay" onClick={() => setSelectedGuide(null)}>
@@ -853,13 +1073,11 @@ const LandingPage = ({ onEnter }) => {
                   </div>
                 </div>
               </div>
-
               <div className="guide-modal-details">
                 <div className="description">
                   <h3>About</h3>
                   <p>{selectedGuide.description}</p>
                 </div>
-
                 <div className="contact-info">
                   <h3>Contact Information</h3>
                   <div className="contact-items">
@@ -877,7 +1095,6 @@ const LandingPage = ({ onEnter }) => {
                     </div>
                   </div>
                 </div>
-
                 <div className="modal-actions">
                   <button className="btn btn-primary">
                     <MessageCircle size={18} />
@@ -888,6 +1105,54 @@ const LandingPage = ({ onEnter }) => {
                     Call Now
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Destination Modal */}
+      {selectedDestination && (
+        <div className="modal-overlay" onClick={() => setSelectedDestination(null)}>
+          <div className="destination-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setSelectedDestination(null)}>×</button>
+            <div className="modal-image">
+              <img src={selectedDestination.image} alt={selectedDestination.name} />
+            </div>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h2>{selectedDestination.name}</h2>
+                <div className="rating">
+                  <Star size={16} fill="currentColor" />
+                  <span>{selectedDestination.rating}</span>
+                </div>
+              </div>
+              <p className="modal-description">{selectedDestination.description}</p>
+              <div className="highlights">
+                <h3>Highlights</h3>
+                <ul>
+                  {selectedDestination.highlights.map((highlight, index) => (
+                    <li key={index}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="modal-info">
+                <div className="info-grid">
+                  <div className="info-item">
+                    <Clock size={18} />
+                    <span>Best Time: {selectedDestination.bestTime}</span>
+                  </div>
+                  <div className="info-item">
+                    <span>District: {selectedDestination.district}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-actions">
+                <button className="btn btn-secondary">
+                  <Navigation size={18} />
+                  Get Directions
+                </button>
+                <button className="btn btn-primary">Book Now</button>
               </div>
             </div>
           </div>
