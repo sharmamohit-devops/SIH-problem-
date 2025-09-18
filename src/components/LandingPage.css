@@ -2890,3 +2890,306 @@ body {
   justify-content: center;
   gap: 0.5rem;
 }
+
+/* Festivals Section */
+.festivals-section {
+  padding: 8rem 0;
+  background: linear-gradient(135deg, white, var(--soft-gray));
+}
+
+.festivals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+}
+
+.festival-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 2px solid rgba(255, 107, 53, 0.1);
+}
+
+.festival-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(135deg, var(--accent-color), var(--gold-accent));
+}
+
+.festival-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--hover-shadow);
+  border-color: var(--accent-color);
+}
+
+.festival-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.festival-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.festival-card:hover .festival-image img {
+  transform: scale(1.1);
+}
+
+.festival-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.festival-date {
+  display: inline-block;
+  background: var(--accent-color);
+  color: var(--text-light);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.festival-content {
+  padding: 2rem;
+}
+
+.festival-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.festival-description {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.festival-highlights {
+  margin-bottom: 1.5rem;
+}
+
+.festival-highlights h4 {
+  color: var(--accent-color);
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.festival-highlights ul {
+  list-style: none;
+  padding: 0;
+}
+
+.festival-highlights li {
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 0.3rem;
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.festival-highlights li::before {
+  content: '✦';
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.festival-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.festival-actions .btn {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* Local Handicraft Shops Section */
+.handicrafts-section {
+  padding: 8rem 0;
+  background: linear-gradient(135deg, var(--background-light), white);
+}
+
+.handicrafts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
+}
+
+.handicraft-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 2px solid rgba(251, 191, 36, 0.1);
+}
+
+.handicraft-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(135deg, var(--gold-accent), var(--accent-color));
+}
+
+.handicraft-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--hover-shadow);
+  border-color: var(--gold-accent);
+}
+
+.handicraft-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.handicraft-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.handicraft-card:hover .handicraft-image img {
+  transform: scale(1.05);
+}
+
+.shop-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--gold-accent);
+  color: var(--text-dark);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.handicraft-content {
+  padding: 2rem;
+}
+
+.handicraft-content h3 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.handicraft-location {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.handicraft-specialties {
+  margin-bottom: 1.5rem;
+}
+
+.handicraft-specialties h4 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.specialty-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.specialty-tag {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--gold-accent);
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.handicraft-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.contact-btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  background: var(--gold-accent);
+  color: var(--text-dark);
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background: var(--accent-color);
+  color: var(--text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+/* Responsive for New Sections */
+@media (max-width: 768px) {
+  .festivals-grid,
+  .handicrafts-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .festival-actions {
+    flex-direction: column;
+  }
+
+  .festival-image,
+  .handicraft-image {
+    height: 200px;
+  }
+
+  .specialty-tags {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

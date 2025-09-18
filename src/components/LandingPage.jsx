@@ -300,6 +300,70 @@ const LandingPage = ({ onEnter }) => {
     }
   ];
 
+  // New Data for Festivals
+  const festivals = [
+    {
+      id: 1,
+      name: 'Sarhul',
+      description: 'The spring festival celebrated by tribal communities to welcome the new year and honor nature.',
+      date: 'March - April',
+      image: 'https://images.pexels.com/photos/2074763/pexels-photo-2074763.jpeg?auto=compress&cs=tinysrgb&w=800',
+      highlights: ['Tree Worship', 'Traditional Dances', 'Community Feasts', 'Nature Rituals']
+    },
+    {
+      id: 2,
+      name: 'Karma',
+      description: 'Harvest festival where tribes pray for prosperity through the sacred Karma tree ritual.',
+      date: 'September - October',
+      image: 'https://images.pexels.com/photos/2074763/pexels-photo-2074763.jpeg?auto=compress&cs=tinysrgb&w=800',
+      highlights: ['Karma Dance', 'Tree Planting', 'Folk Songs', 'Agricultural Blessings']
+    },
+    {
+      id: 3,
+      name: 'Sohrai',
+      description: 'Cattle festival marking the end of the harvest season with vibrant paintings and celebrations.',
+      date: 'November - December',
+      image: 'https://images.pexels.com/photos/2074763/pexels-photo-2074763.jpeg?auto=compress&cs=tinysrgb&w=800',
+      highlights: ['Sohrai Paintings', 'Livestock Decoration', 'Tribal Music', 'Village Gatherings']
+    },
+    {
+      id: 4,
+      name: 'Tusu',
+      description: 'Winter festival honoring the goddess of harvest with songs and dances by young girls.',
+      date: 'January',
+      image: 'https://images.pexels.com/photos/2074763/pexels-photo-2074763.jpeg?auto=compress&cs=tinysrgb&w=800',
+      highlights: ['Tusu Songs', 'Doll Making', 'Group Dances', 'Youth Celebrations']
+    }
+  ];
+
+  // New Data for Handicraft Shops
+  const handicraftShops = [
+    {
+      id: 1,
+      name: 'Tribal Art Emporium',
+      location: 'Ranchi',
+      specialties: ['Sohrai Paintings', 'Dhokra Metal Crafts', 'Wood Carvings'],
+      image: 'https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&w=800',
+      contact: '+91 98765 43213'
+    },
+    {
+      id: 2,
+      name: 'Oraon Handicrafts',
+      location: 'Gumla',
+      specialties: ['Bamboo Baskets', 'Terracotta Pottery', 'Tribal Jewelry'],
+      image: 'https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&w=800',
+      contact: '+91 98765 43214'
+    },
+    {
+      id: 3,
+      name: 'Santhali Crafts Hub',
+      location: 'Dumka',
+      specialties: ['Wall Hangings', 'Embroidery', 'Stone Sculptures'],
+      image: 'https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&w=800',
+      contact: '+91 98765 43215'
+    }
+  ];
+
   return (
     <div className="landing-page">
       {/* Navigation Bar */}
@@ -313,12 +377,12 @@ const LandingPage = ({ onEnter }) => {
               <a href="#home" onClick={() => scrollToSection('home')}>Home</a>
               <a href="#features" onClick={() => scrollToSection('features')}>Features</a>
               <a href="#destinations" onClick={() => scrollToSection('destinations')}>Destinations</a>
+              <a href="#festivals" onClick={() => scrollToSection('festivals')}>Festivals</a>
+              <a href="#map" onClick={() => scrollToSection('map')}>Map</a>
               <a href="#guides" onClick={() => scrollToSection('guides')}>Guides</a>
+              <a href="#handicrafts" onClick={() => scrollToSection('handicrafts')}>Handicrafts</a>
               <a href="#plan" onClick={() => scrollToSection('plan')}>Plan Trip</a>
-              <a href="#group-travel" onClick={() => scrollToSection('group-travel')}>Group Travel</a>
-              <a href="#ar-vr" onClick={() => scrollToSection('ar-vr')}>AR/VR</a>
-              <a href="#auth" onClick={() => scrollToSection('auth')}>Sign In/Enroll</a>
-              <a href="#payment" onClick={() => scrollToSection('payment')}>Payment</a>
+              <a href="#auth" onClick={() => scrollToSection('auth')}>Sign In</a>
               <a href="#emergency" onClick={() => scrollToSection('emergency')}>Emergency</a>
               <button className="btn btn-outline history-btn" onClick={toggleHistory}>
                 <BookOpen size={16} />
@@ -471,6 +535,49 @@ const LandingPage = ({ onEnter }) => {
         </div>
       </section>
 
+      {/* New Festivals Section */}
+      <section id="festivals" className="festivals-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Vibrant Festivals of Jharkhand</h2>
+            <p>Immerse yourself in the rich cultural celebrations and tribal traditions</p>
+          </div>
+          <div className="festivals-grid">
+            {festivals.map((festival) => (
+              <div key={festival.id} className="festival-card">
+                <div className="festival-image">
+                  <img src={festival.image} alt={festival.name} />
+                  <div className="festival-overlay">
+                    <span className="festival-date">{festival.date}</span>
+                  </div>
+                </div>
+                <div className="festival-content">
+                  <h3>{festival.name}</h3>
+                  <p className="festival-description">{festival.description}</p>
+                  <div className="festival-highlights">
+                    <h4>Highlights:</h4>
+                    <ul>
+                      {festival.highlights.map((highlight, index) => (
+                        <li key={index}>{highlight}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="festival-actions">
+                    <button className="btn btn-primary">
+                      Learn More
+                    </button>
+                    <button className="btn btn-outline">
+                      <Calendar size={16} />
+                      Add to Calendar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Explore by Districts Section */}
       <section id="districts" className="districts-section">
         <div className="container">
@@ -513,6 +620,37 @@ const LandingPage = ({ onEnter }) => {
                   Explore {districts[activeDistrict].name}
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New Tracking Map Section */}
+      <section id="map" className="tracking-map-section">
+        <div className="container tracking-map-container">
+          <div className="tracking-map-header">
+            <h2>Interactive Tracking Map</h2>
+            <p>Navigate Jharkhand's destinations, track your route, and discover nearby attractions in real-time</p>
+          </div>
+          <div className="map-wrapper">
+            <div id="map"></div>
+            <div className="map-controls">
+              <button className="map-control-btn">
+                <Search size={16} />
+                Search Location
+              </button>
+              <button className="map-control-btn">
+                <Navigation size={16} />
+                Track Route
+              </button>
+              <div className="map-search">
+                <input type="text" placeholder="Enter destination..." />
+                <button><Search size={16} /></button>
+              </div>
+            </div>
+            <div className="map-overlay">
+              <MapPin size={16} />
+              Explore 50+ locations across Jharkhand
             </div>
           </div>
         </div>
@@ -597,6 +735,49 @@ const LandingPage = ({ onEnter }) => {
                         Contact
                       </button>
                     </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* New Local Handicraft Shops Section */}
+      <section id="handicrafts" className="handicrafts-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Local Handicraft Shops</h2>
+            <p>Support local artisans and take home authentic tribal crafts and souvenirs</p>
+          </div>
+          <div className="handicrafts-grid">
+            {handicraftShops.map((shop) => (
+              <div key={shop.id} className="handicraft-card">
+                <div className="handicraft-image">
+                  <img src={shop.image} alt={shop.name} />
+                  <span className="shop-badge">Authentic</span>
+                </div>
+                <div className="handicraft-content">
+                  <h3>{shop.name}</h3>
+                  <div className="handicraft-location">
+                    <MapPin size={16} />
+                    {shop.location}
+                  </div>
+                  <div className="handicraft-specialties">
+                    <h4>Specialties:</h4>
+                    <div className="specialty-tags">
+                      {shop.specialties.map((specialty, index) => (
+                        <span key={index} className="specialty-tag">{specialty}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="handicraft-footer">
+                    <span className="contact-btn" onClick={() => window.open(`tel:${shop.contact}`)}>
+                      Call: {shop.contact}
+                    </span>
+                    <button className="btn btn-primary">
+                      Visit Shop
+                    </button>
                   </div>
                 </div>
               </div>
