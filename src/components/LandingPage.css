@@ -213,7 +213,11 @@ body {
 }
 
 .nav-logo h2 {
+<<<<<<< HEAD
   padding-right: 85px;
+=======
+  
+>>>>>>> 2aba086aaa4e0d3e25422201ea4f9241894fa95a
   font-family: 'Playfair Display', serif;
   color: var(--text-light);
   font-size: 1.8rem;
@@ -2890,6 +2894,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
 }
+<<<<<<< HEAD
 
 /* Festivals Section */
 .festivals-section {
@@ -3193,3 +3198,5 @@ body {
     align-items: flex-start;
   }
 }
+=======
+>>>>>>> 2aba086aaa4e0d3e25422201ea4f9241894fa95a
