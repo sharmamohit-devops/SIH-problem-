@@ -1177,7 +1177,6 @@ const LandingPage = ({ onEnter }) => {
       <div className="chatbot-button">
         <button className="btn btn-primary">
           <MessageCircle size={24} />
-          Chat with AI Assistant
         </button>
       </div>
 
